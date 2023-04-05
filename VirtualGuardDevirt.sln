@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualGuardDevirt", "VirtualGuardDevirt.csproj", "{C03820E4-E404-4F5B-A98C-FA7FB1C854BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C03820E4-E404-4F5B-A98C-FA7FB1C854BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C03820E4-E404-4F5B-A98C-FA7FB1C854BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C03820E4-E404-4F5B-A98C-FA7FB1C854BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C03820E4-E404-4F5B-A98C-FA7FB1C854BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {082676E0-6FB5-4116-B176-4C89C9DF1878}
+	EndGlobalSection
+EndGlobal
