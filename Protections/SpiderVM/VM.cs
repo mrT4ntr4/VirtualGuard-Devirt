@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AsmResolver.DotNet;
+using System.Collections.Generic;
 using VirtualGuardDevirt.Protections.SpiderVM.VMData;
 
 namespace VirtualGuardDevirt.Protections.SpiderVM
@@ -8,6 +9,7 @@ namespace VirtualGuardDevirt.Protections.SpiderVM
         public static byte[] SpiderBytecode;
         public static Dictionary<int, List<VMInstruction>> Methods = new Dictionary<int, List<VMInstruction>>();
         public static List<VMMethod> MethodVirt = new List<VMMethod>();
+        public static TypeDefinition VMType = null;
 
         internal static void Execute()
         {

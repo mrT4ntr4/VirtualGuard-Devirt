@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AsmResolver.DotNet;
+using System.Collections.Generic;
 using VirtualGuardDevirt.Protections.CrocodileVM.VMData;
 
 namespace VirtualGuardDevirt.Protections.CrocodileVM
@@ -8,6 +9,7 @@ namespace VirtualGuardDevirt.Protections.CrocodileVM
         public static byte[] CrocodileBytecode;
         public static Dictionary<int, List<VMInstruction>> Blocks = new Dictionary<int, List<VMInstruction>>();
         public static List<VMMethod> MethodVirt = new List<VMMethod>();
+        public static TypeDefinition VMType = null;
 
         internal static void Execute()
         {

@@ -1,4 +1,5 @@
-﻿using AsmResolver.DotNet.Collections;
+﻿using AsmResolver.DotNet;
+using AsmResolver.DotNet.Collections;
 using AsmResolver.DotNet.Signatures.Types;
 using AsmResolver.PE.DotNet.Cil;
 using System.Collections.Generic;
@@ -41,6 +42,7 @@ namespace VirtualGuardDevirt.Protections.CrocodileVM
                         }
                     }
                 }
+                if(type.FullName.Contains("A4FD01")) VM.VMType = type;
             }
         }
     }

@@ -41,6 +41,7 @@ namespace VirtualGuardDevirt.Protections.SpiderVM
                         }
                     }
                 }
+                if (type.FullName.Contains("9")) VM.VMType = type;
             }
         }
     }
