@@ -53,6 +53,7 @@ namespace VirtualGuardDevirt.Protections.CrocodileVM
                 }
             }
             module.TopLevelTypes.Remove(VM.VMType);
+            module.Resources.Remove(VM.VMResource);
         }
 
         public static List<CilInstruction> Disassemble(VMMethod _method, CilLocalVariableCollection methodLocalVars)

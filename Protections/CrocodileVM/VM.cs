@@ -10,6 +10,7 @@ namespace VirtualGuardDevirt.Protections.CrocodileVM
         public static Dictionary<int, List<VMInstruction>> Blocks = new Dictionary<int, List<VMInstruction>>();
         public static List<VMMethod> MethodVirt = new List<VMMethod>();
         public static TypeDefinition VMType = null;
+        public static ManifestResource VMResource = null;
 
         internal static void Execute()
         {

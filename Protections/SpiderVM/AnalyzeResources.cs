@@ -10,6 +10,7 @@ namespace VirtualGuardDevirt.Protections.SpiderVM
         {
             ManifestResource resource = (from x in module.Resources where x.Name == "spider" select x).First();
             VM.SpiderBytecode = resource.GetData();
+            VM.VMResource = resource;
         }
     }
 }
