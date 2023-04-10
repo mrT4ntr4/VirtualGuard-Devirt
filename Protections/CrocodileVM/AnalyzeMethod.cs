@@ -42,7 +42,7 @@ namespace VirtualGuardDevirt.Protections.CrocodileVM
                         }
                     }
                 }
-                if(type.FullName.Contains("A4FD01")) VM.VMType = type;
+                if(type.FullName == "A4FD01") VM.VMType = type;
             }
         }
     }
