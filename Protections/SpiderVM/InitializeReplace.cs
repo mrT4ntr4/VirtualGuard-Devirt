@@ -44,6 +44,8 @@ namespace VirtualGuardDevirt.Protections.SpiderVM
                 {
                     Console.WriteLine(instr);
                 }
+                module.TopLevelTypes.Remove(VM.VMType);
+                module.Resources.Remove(VM.VMResource);
             }
         }
 

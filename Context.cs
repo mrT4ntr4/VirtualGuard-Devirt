@@ -34,7 +34,7 @@ namespace VirtualGuardDevirt
                 var imageBuilder = new ManagedPEImageBuilder();
 
                 var factory = new DotNetDirectoryFactory();
-                factory.MetadataBuilderFlags = MetadataBuilderFlags.PreserveAll;
+                //factory.MetadataBuilderFlags = MetadataBuilderFlags.PreserveAll; //Doesn't looks like needed after file processing.
                 imageBuilder.DotNetDirectoryFactory = factory;
 
                 module.Write(filename, imageBuilder);

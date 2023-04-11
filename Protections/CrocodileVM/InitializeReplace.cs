@@ -8,6 +8,7 @@ using AsmResolver.PE.DotNet.Metadata.Tables;
 using AsmResolver.PE.DotNet.Metadata.Tables.Rows;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using VirtualGuardDevirt.Protections.CrocodileVM.VMData;
 using static VirtualGuardDevirt.Context;
 using static VirtualGuardDevirt.Logger;
@@ -51,6 +52,8 @@ namespace VirtualGuardDevirt.Protections.CrocodileVM
                     Console.WriteLine(instr);
                 }
             }
+            module.TopLevelTypes.Remove(VM.VMType);
+            module.Resources.Remove(VM.VMResource);
         }
 
         public static List<CilInstruction> Disassemble(VMMethod _method, CilLocalVariableCollection methodLocalVars)
