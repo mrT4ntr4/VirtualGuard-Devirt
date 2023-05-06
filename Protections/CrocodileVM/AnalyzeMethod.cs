@@ -2,11 +2,8 @@
 using AsmResolver.DotNet.Collections;
 using AsmResolver.DotNet.Signatures.Types;
 using AsmResolver.PE.DotNet.Cil;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using VirtualGuardDevirt.Protections.CrocodileVM.VMData;
-using VirtualGuardDevirt.Protections.SpiderVM.VMData;
 using static VirtualGuardDevirt.Context;
 using static VirtualGuardDevirt.Logger;
 using VMMethod = VirtualGuardDevirt.Protections.CrocodileVM.VMData.VMMethod;
@@ -48,7 +45,6 @@ namespace VirtualGuardDevirt.Protections.CrocodileVM
 
                                 if(VM.VMType == null)
                                 {
-
                                     VM.VMType = methodDef.DeclaringType;
 
                                     Log($"Found VM Method Type: {VM.VMType.FullName}", TypeMessage.Info);

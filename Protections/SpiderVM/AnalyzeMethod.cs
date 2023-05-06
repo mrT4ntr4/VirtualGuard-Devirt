@@ -45,7 +45,6 @@ namespace VirtualGuardDevirt.Protections.SpiderVM
 
                                 if (VM.VMType == null)
                                 {
-
                                     VM.VMType = methodDef.DeclaringType;
 
                                     Log($"Found VM Method Type: {VM.VMType.FullName}", TypeMessage.Info);
