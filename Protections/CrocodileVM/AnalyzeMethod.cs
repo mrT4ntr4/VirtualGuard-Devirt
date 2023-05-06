@@ -4,9 +4,9 @@ using AsmResolver.DotNet.Signatures.Types;
 using AsmResolver.PE.DotNet.Cil;
 using System.Collections.Generic;
 using System.Linq;
+using VirtualGuardDevirt.Protections.CrocodileVM.VMData;
 using static VirtualGuardDevirt.Context;
 using static VirtualGuardDevirt.Logger;
-using VMMethod = VirtualGuardDevirt.Protections.CrocodileVM.VMData.VMMethod;
 
 namespace VirtualGuardDevirt.Protections.CrocodileVM
 {
