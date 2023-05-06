@@ -1,4 +1,5 @@
-﻿using AsmResolver.DotNet.Collections;
+﻿using AsmResolver.DotNet;
+using AsmResolver.DotNet.Collections;
 using AsmResolver.DotNet.Signatures.Types;
 using AsmResolver.PE.DotNet.Cil;
 using System.Collections.Generic;
@@ -21,27 +22,41 @@ namespace VirtualGuardDevirt.Protections.SpiderVM
                     var instrCount = methodInstr.Count;
                     if (instrCount >= 6)
                     {
-                        //TODO : Better Signature
-                        if (methodInstr[instrCount - 3].OpCode == CilOpCodes.Call
-                            && methodInstr[instrCount - 3].Operand.ToString().Contains("9::8fb"))
+                        CilInstruction theInstr = methodInstr[instrCount - 3];
+                        if (theInstr.OpCode == CilOpCodes.Call)
                         {
-                            int disasConst = methodInstr[instrCount - 4].GetLdcI4Constant();
-                            List<TypeSignature> paramTypes = new List<TypeSignature>();
+                            IMethodDescriptor methodDesc = (IMethodDescriptor)theInstr.Operand;
 
-                            foreach (var item in methodInstr)
+                            MethodDefinition methodDef = methodDesc.Resolve();
+
+                            if (methodDef.Parameters.Count() == 2 && methodDef.Parameters[0].ToString().Contains("System.Object[]") && methodDef.Parameters[1].ToString().Contains("System.Int32"))
                             {
-                                if (item.OpCode == CilOpCodes.Ldarg)
+                                int disasConst = methodInstr[instrCount - 4].GetLdcI4Constant();
+                                List<TypeSignature> paramTypes = new List<TypeSignature>();
+
+                                foreach (var item in methodInstr)
                                 {
-                                    Parameter ee = item.Operand as Parameter;
-                                    paramTypes.Add(ee.ParameterType);
+                                    if (item.OpCode == CilOpCodes.Ldarg)
+                                    {
+                                        Parameter pp = item.Operand as Parameter;
+                                        paramTypes.Add(pp.ParameterType);
+                                    }
                                 }
+
+                                if (VM.VMType == null)
+                                {
+
+                                    VM.VMType = methodDef.DeclaringType;
+
+                                    Log($"Found VM Method Type: {VM.VMType.FullName}", TypeMessage.Info);
+                                }
+
+                                Log($"Found Virtualized method : {method.FullName} with disasConst : 0x{disasConst:x8}", TypeMessage.Info);
+                                VM.MethodVirt.Add(new VMMethod(method.FullName, disasConst, paramTypes, method));
                             }
-                            Log($"Found Virtualized method : {method.FullName} with disasConst : 0x{disasConst:x8}", TypeMessage.Info);
-                            VM.MethodVirt.Add(new VMMethod(method.FullName, disasConst, paramTypes, method));
                         }
                     }
                 }
-                if (type.FullName == "9") VM.VMType = type;
             }
         }
     }

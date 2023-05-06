@@ -2,11 +2,14 @@
 using AsmResolver.DotNet.Collections;
 using AsmResolver.DotNet.Signatures.Types;
 using AsmResolver.PE.DotNet.Cil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VirtualGuardDevirt.Protections.CrocodileVM.VMData;
+using VirtualGuardDevirt.Protections.SpiderVM.VMData;
 using static VirtualGuardDevirt.Context;
 using static VirtualGuardDevirt.Logger;
+using VMMethod = VirtualGuardDevirt.Protections.CrocodileVM.VMData.VMMethod;
 
 namespace VirtualGuardDevirt.Protections.CrocodileVM
 {
@@ -22,27 +25,41 @@ namespace VirtualGuardDevirt.Protections.CrocodileVM
                     var instrCount = methodInstr.Count;
                     if (instrCount >= 12)
                     {
-                        //TODO : Better Signature
-                        if (methodInstr[instrCount - 3].OpCode == CilOpCodes.Call
-                            && methodInstr[instrCount - 3].Operand.ToString().Contains("A4FD01::2CDA08"))
+                        CilInstruction theInstr = methodInstr[instrCount - 3];
+                        if (theInstr.OpCode == CilOpCodes.Call)
                         {
-                            int disasConst = methodInstr[instrCount - 4].GetLdcI4Constant();
-                            List<TypeSignature> paramTypes = new List<TypeSignature>();
+                            IMethodDescriptor methodDesc = (IMethodDescriptor)theInstr.Operand;
 
-                            foreach (var item in methodInstr)
+                            MethodDefinition methodDef = methodDesc.Resolve();
+
+                            if (methodDef.Parameters.Count() == 2 && methodDef.Parameters[0].ToString().Contains("System.Object[]") && methodDef.Parameters[1].ToString().Contains("System.Int32"))
                             {
-                                if (item.OpCode == CilOpCodes.Ldarg)
+                                int disasConst = methodInstr[instrCount - 4].GetLdcI4Constant();
+                                List<TypeSignature> paramTypes = new List<TypeSignature>();
+
+                                foreach (var item in methodInstr)
                                 {
-                                    Parameter pp = item.Operand as Parameter;
-                                    paramTypes.Add(pp.ParameterType);
+                                    if (item.OpCode == CilOpCodes.Ldarg)
+                                    {
+                                        Parameter pp = item.Operand as Parameter;
+                                        paramTypes.Add(pp.ParameterType);
+                                    }
                                 }
+
+                                if(VM.VMType == null)
+                                {
+
+                                    VM.VMType = methodDef.DeclaringType;
+
+                                    Log($"Found VM Method Type: {VM.VMType.FullName}", TypeMessage.Info);
+                                }
+
+                                Log($"Found Virtualized method : {method.FullName} with disasConst : 0x{disasConst:x8}", TypeMessage.Info);
+                                VM.MethodVirt.Add(new VMMethod(method.FullName, disasConst, paramTypes, method));
                             }
-                            Log($"Found Virtualized method : {method.FullName} with disasConst : 0x{disasConst:x8}", TypeMessage.Info);
-                            VM.MethodVirt.Add(new VMMethod(method.FullName, disasConst, paramTypes, method));
                         }
                     }
                 }
-                if(type.FullName == "A4FD01") VM.VMType = type;
             }
         }
     }
