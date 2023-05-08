@@ -134,8 +134,8 @@ namespace VirtualGuardDevirt.Protections.CrocodileVM
                             break;
                         case 0x1:
                             //Console.WriteLine($"ceq V_{operand1} V_{operand2}");
-                            BlockIns.Add(new CilInstruction(CilOpCodes.Ldloc, methodLocalVars[operand1]));
                             BlockIns.Add(new CilInstruction(CilOpCodes.Ldloc, methodLocalVars[operand2]));
+                            BlockIns.Add(new CilInstruction(CilOpCodes.Ldloc, methodLocalVars[operand1]));
                             BlockIns.Add(new CilInstruction(CilOpCodes.Ceq));
                             BlockIns.Add(new CilInstruction(CilOpCodes.Stloc, methodLocalVars[0x3b]));
                             break;
@@ -206,8 +206,8 @@ namespace VirtualGuardDevirt.Protections.CrocodileVM
                             break;
                         case 0x9:
                             //Console.WriteLine($"cgt V_{operand1} V_{operand2}");
-                            BlockIns.Add(new CilInstruction(CilOpCodes.Ldloc, methodLocalVars[operand1]));
                             BlockIns.Add(new CilInstruction(CilOpCodes.Ldloc, methodLocalVars[operand2]));
+                            BlockIns.Add(new CilInstruction(CilOpCodes.Ldloc, methodLocalVars[operand1]));
                             BlockIns.Add(new CilInstruction(CilOpCodes.Ceq));
                             BlockIns.Add(new CilInstruction(CilOpCodes.Stloc, methodLocalVars[0x3b]));
                             break;
