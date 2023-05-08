@@ -12,6 +12,20 @@ https://mrt4ntr4.github.io/VirtualGuard-P2/
 > WIP : It's missing some handlers right now but enough to devirt the crackme.
 
 ## Usage
+
+1. Please use [de4dot-vg](https://github.com/mrT4ntr4/de4dot-vg) for deobfuscating the executable first.
+```
+λ de4dot.exe test-guarded_croc.exe
+
+de4dot v3.1.41592.3405 Copyright (C) 2011-2015 de4dot@gmail.com
+Latest version and source code: https://github.com/0xd4d/de4dot
+
+Detected VirtualGuard  (Z:\de4dot-vg\test-guarded_croc.exe)
+Cleaning Z:\de4dot-vg\test-guarded_croc.exe
+Renaming all obfuscated symbols
+Saving Z:\de4dot-vg\test-guarded_croc-cleaned.exe
+```
+2. Now you are ready to use the Devirt!  
 ```
 λ VirtualGuardDevirt.exe  .\test-guarded_croc-cleaned.exe
 
